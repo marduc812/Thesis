@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bar="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/attach"
+        android:title="@string/Attach"
+        android:icon="@drawable/ic_attach_file_white_48dp"
+        bar:showAsAction="ifRoom" />
+
+    <item android:id="@+id/fullview"
+        android:title="@string/webz"
+        android:icon="@drawable/ic_open_in_browser_white_48dp"
+        bar:showAsAction="ifRoom" />
+
+    <item android:id="@+id/share"
+        android:title="@string/shareit"
+        android:icon="@drawable/ic_share_white_48dp"
+        bar:showAsAction="ifRoom" />
+</menu>

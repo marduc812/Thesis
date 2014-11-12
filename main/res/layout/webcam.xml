@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2.0"
+    android:background="#fcfcfc">
+
+    <RelativeLayout
+        android:id="@+id/topview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:background="#37474f">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView6"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/botview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:background="#3a3a3a">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/textView"
+            android:textColor="#fcfcfc"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Webcam: 2"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/button"
+                android:layout_toEndOf="@+id/button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save to Gallery"
+                android:id="@+id/button"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

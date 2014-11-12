@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="marduc812.electronicengineering" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        >
+        <activity
+            android:name=".MainMenu"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+
+        <activity android:name=".ProgrammaMathimaton"/>
+
+        <activity android:name=".NewsActivity"/>
+
+        <activity android:name=".AnnounDisplay"/>
+
+        <activity android:name=".Arxeia"/>
+
+        <activity android:name=".ArxeiaDisplay"/>
+
+        <activity android:name=".ContactUs"/>
+
+        <activity android:name=".webview"/>
+
+        <activity android:name=".Prefs"/>
+
+        <activity android:name=".WeatherClass"/>
+
+        <activity android:name=".About"/>
+
+        <activity android:name=".FavoritesActivity"/>
+
+        <activity android:name=".Webcam"/>
+
+    </application>
+
+</manifest>

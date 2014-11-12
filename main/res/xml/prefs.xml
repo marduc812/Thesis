@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:key="config" android:title="Ρυθμίσεις">
+    <CheckBoxPreference
+        android:title="@string/data"
+        android:key="wifionly"
+        android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:title="@string/vibr"
+            android:key="vibr"
+            android:summary="@string/vibrdesc"
+            android:defaultValue="true"/>
+
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="web" android:title="Webcam">
+        <EditTextPreference
+            android:title="@string/webcamspeed"
+            android:key="webref"
+            android:summary="@string/webcamdesc"/>
+
+    </PreferenceCategory>
+
+
+<!--
+
+
+
+    <PreferenceCategory android:key="config" android:title="Extra Settings">
+    <EditTextPreference
+         android:title="ασδαδ"
+         android:key="worktitle"/>
+
+        <ListPreference
+        android:title="ασδασδ"
+        android:key="list"/>
+
+    <CheckBoxPreference
+        android:title="γεργερ"
+        android:key="tipscheck"
+        android:defaultValue="false"/>
+
+
+    <EditTextPreference
+        android:title="φργργργργ"
+        android:key="incomegoal"
+        android:numeric="integer"/>
+
+    </PreferenceCategory>
+
+-->
+
+
+
+</PreferenceScreen>

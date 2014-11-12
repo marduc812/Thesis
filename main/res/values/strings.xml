@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Τμήμα Ηλεκτρονικής</string>
+    <string name="action_settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="fbs">Facebook</string>
+    <string name="location">Τοποθεσία σχολής</string>
+    <string name="deleteDB">Καθαρισμός Αγαπημένων</string>
+
+    <!-- Settings Strings-->
+
+    <string name="data">Χρήση μόνο με WiFi</string>
+    <string name="vibr">Δόνηση ενημέρωσης</string>
+    <string name="vibrdesc">Όταν ολοκληρωθεί η λήψη</string>
+    <string name="kairos">Τοποθεσία Καιρού</string>
+
+    <string name="Attach">Συνημμένο</string>
+    <string name="webz">Προβολή στον Browser</string>
+    <string name="shareit">Μοιράσου το</string>
+
+    <string name="webcamspeed">Χρόνος ανανέωσης webcam</string>
+    <string name="webcamdesc">Ανάμεσα σε 1000 ~ 5000 ms</string>
+
+    <!-- About Strings-->
+
+    <!-- Favorites Menu-->
+    <string name="browser">Άνοιγμα με browser</string>
+
+
+</resources>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1"
+    android:background="#37474f">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:id="@+id/linearLayout"
+        android:background="@drawable/titleback">
+
+        <RadioGroup
+            android:id="@+id/downs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <RadioButton
+                android:id="@+id/mathimaton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Πρόγραμμα Μαθημάτων"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/iouniou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Πρόγραμμα εξετάσεων Ιουνίου" />
+
+            <RadioButton
+                android:id="@+id/septemvriou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Πρόγραμμα εξετάσεων Σεπτεμβρίου" />
+
+            <RadioButton
+                android:id="@+id/fevrouariou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Πρόγραμμα εξετάσεων Φεβρουαρίου" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/downs"
+            android:layout_alignLeft="@+id/downs"
+            android:layout_alignStart="@+id/downs"
+            android:layout_alignRight="@+id/downs"
+            android:layout_alignEnd="@+id/downs"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ακύρωση"
+                android:id="@+id/cancel"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Κατέβασε"
+                android:layout_below="@+id/downs"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:padding="5dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/titleback">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Επιλογή Προγράμματος"
+            android:id="@+id/textView"
+            android:layout_gravity="bottom"
+            android:textStyle="bold"
+            android:gravity="center" />
+    </LinearLayout>
+
+</RelativeLayout>

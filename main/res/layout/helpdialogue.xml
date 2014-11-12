@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#AAFFFFFF">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:id="@+id/relativeLayout"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Complete Action"
+            android:id="@+id/textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:textColor="#555555" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout2">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton3"
+                android:layout_weight="1"
+                android:src="@drawable/ic_favorite_grey600_48dp"
+                android:background="@null"
+                android:layout_margin="10dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:src="@drawable/ic_computer_grey600_48dp"
+                android:background="@null"
+                android:layout_weight="1"
+                android:layout_margin="10dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:src="@drawable/ic_share_grey600_48dp"
+                android:background="@null"
+                android:layout_weight="1"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelbut"
+            android:background="@null"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
