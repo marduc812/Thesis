@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton3"
                 android:layout_weight="1"
-                android:src="@drawable/ic_favorite_grey600_48dp"
+                android:src="@drawable/favorite"
                 android:background="@null"
                 android:layout_margin="10dp" />
 
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton"
-                android:src="@drawable/ic_computer_grey600_48dp"
+                android:src="@drawable/desktop"
                 android:background="@null"
                 android:layout_weight="1"
                 android:layout_margin="10dp" />
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton2"
-                android:src="@drawable/ic_share_grey600_48dp"
+                android:src="@drawable/shareit"
                 android:background="@null"
                 android:layout_weight="1"
                 android:layout_margin="10dp" />

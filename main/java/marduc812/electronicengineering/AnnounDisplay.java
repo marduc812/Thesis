@@ -41,6 +41,7 @@ public class AnnounDisplay extends ActionBarActivity {
     boolean visible;
     ArrayAdapterAttach arrayAdapter;
     ArrayList<Integer> images;
+    Boolean attachments;
 
 
     @Override
@@ -48,6 +49,8 @@ public class AnnounDisplay extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcemedisp);
 
+
+        attachments=false;
 
 
         visible=false;
@@ -101,7 +104,6 @@ public class AnnounDisplay extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(AnnounDisplay.this);
-            mProgressDialog.setTitle("Dowloading data");
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();
@@ -137,10 +139,12 @@ public class AnnounDisplay extends ActionBarActivity {
                         AnnAttTitle.add(AnnLinkTitle);
                         images.add(R.drawable.ic_action_download);
                         Log.d("links",AnnAtts);
+                        attachments=true;
                     }
 
                 }
 
+                invalidateOptionsMenu();
 
 
 
@@ -192,6 +196,13 @@ public class AnnounDisplay extends ActionBarActivity {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.inpostmenu, menu);
+
+
+        if (!attachments) {
+            menu.findItem(R.id.attach).setVisible(false);
+        }
+
+
         return super.onCreateOptionsMenu(menu);
     }
 

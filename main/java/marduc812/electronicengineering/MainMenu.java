@@ -70,30 +70,35 @@ public class MainMenu extends ActionBarActivity{
                 }
                 else if (position==5)
                 {
-                    Intent i = new Intent(MainMenu.this,Webcam.class);
+                    Intent i = new Intent(MainMenu.this,WeatherClass.class);
                     startActivity(i);
                 }
                 else if (position==6)
                 {
-                    Intent i = new Intent(MainMenu.this,Prefs.class);
+                    Intent i = new Intent(MainMenu.this,Webcam.class);
                     startActivity(i);
                 }
                 else if (position==7)
                 {
-                    Intent i = new Intent(MainMenu.this,ContactUs.class);
+                    Intent i = new Intent(MainMenu.this,Prefs.class);
                     startActivity(i);
                 }
-                else if (position == 8)
+                else if (position==8)
                 {
-                    Intent i = new Intent(MainMenu.this,About.class);
+                    Intent i = new Intent(MainMenu.this,ContactUs.class);
                     startActivity(i);
                 }
                 else if (position == 9)
                 {
+                    Intent i = new Intent(MainMenu.this,About.class);
+                    startActivity(i);
+                }
+                else if (position == 10)
+                {
                     Intent i = new Intent(MainMenu.this,FavoritesActivity.class);
                     startActivity(i);
                 }
-                else  if (position==10)
+                else  if (position==11)
                 {
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse("http://www.el.teithe.gr/"));
@@ -116,6 +121,7 @@ public class MainMenu extends ActionBarActivity{
         title.add("Αρχεία");
         title.add("ΠΥΘΙΑ");
         title.add("Καιρός");
+        title.add("Webcam");
         title.add("Ρυθμίσεις");
         title.add("Επικοινωνία");
         title.add("Πληροφορίες");
@@ -129,6 +135,7 @@ public class MainMenu extends ActionBarActivity{
         icon.add(R.drawable.ic_file_download_grey600_48dp);
         icon.add(R.drawable.ic_web_grey600_48dp);
         icon.add(R.drawable.ic_wb_sunny_grey600_48dp);
+        icon.add(R.drawable.ic_camera_alt_grey600_48dp);
         icon.add(R.drawable.ic_settings_applications_grey600_48dp);
         icon.add(R.drawable.ic_perm_contact_cal_grey600_48dp);
         icon.add(R.drawable.ic_info_outline_grey600_48dp);

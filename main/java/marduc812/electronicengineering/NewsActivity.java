@@ -1,5 +1,6 @@
 package marduc812.electronicengineering;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +16,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,6 +40,8 @@ public class NewsActivity extends ActionBarActivity {
     ProgressDialog mProgressDialog;
     ArrayList<String> AnnounceTitles,AnnounceDesc,AnnounceLinks;
     ArrayList<Integer> AnnounceImages;
+    SQLController dbcon;
+    String LinkURL,title,desc,cate;
 
 
     ListView list;
@@ -95,6 +102,90 @@ public class NewsActivity extends ActionBarActivity {
             }
         });
 
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           final int pos, long id) {
+                // TODO Auto-generated method stub
+
+                LinkURL = AnnounceLinks.get(pos);
+                title = AnnounceTitles.get(pos);
+                desc = AnnounceDesc.get(pos);
+                cate = "Νέα";
+
+
+                final Dialog dialog = new Dialog(NewsActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.helpdialogue);
+                dialog.setCancelable(true);
+                ImageButton hint = (ImageButton)dialog.findViewById(R.id.imageButton3);
+                ImageButton open = (ImageButton)dialog.findViewById(R.id.imageButton);
+                ImageButton share = (ImageButton)dialog.findViewById(R.id.imageButton2);
+                Button cancel = (Button)dialog.findViewById(R.id.cancelbut);
+                dialog.show();
+
+                hint.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        dbcon = new SQLController(NewsActivity.this);
+                        dbcon.open();
+                        dbcon.insertData(title,LinkURL,desc,cate);
+                        dialog.dismiss();
+
+                        Toast.makeText(getApplicationContext(), title + " προστέθηκε στα αγαπημένα", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                open.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String linkurl = AnnounceLinks.get(pos);
+                        dialog.dismiss();
+
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(linkurl));
+                        startActivity(i);
+
+
+                    }
+                });
+
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String linkurl = AnnounceLinks.get(pos);
+                        dialog.dismiss();
+
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, linkurl);
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
+
+
+                    }
+                });
+
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+                return true;
+            }
+        });
+
     }
 
 
@@ -104,7 +195,6 @@ public class NewsActivity extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(NewsActivity.this);
-            mProgressDialog.setTitle("Dowloading data");
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();

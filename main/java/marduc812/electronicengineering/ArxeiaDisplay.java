@@ -41,12 +41,15 @@ public class ArxeiaDisplay extends ActionBarActivity {
     boolean visible;
     ArrayAdapterAttach arrayAdapter;
     ArrayList<Integer> images;
+    Boolean arxeia;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcemedisp);
+
+        arxeia = false;
 
         visible=false;
 
@@ -99,7 +102,6 @@ public class ArxeiaDisplay extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(ArxeiaDisplay.this);
-            mProgressDialog.setTitle("Φόρτωση Ανακοίνωσης");
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();
@@ -135,6 +137,7 @@ public class ArxeiaDisplay extends ActionBarActivity {
                         AnnAttTitle.add(AnnLinkTitle);
                         images.add(R.drawable.ic_action_download);
                         Log.d("links", AnnAtts);
+                        arxeia=true;
                     }
 
                 }
@@ -143,7 +146,7 @@ public class ArxeiaDisplay extends ActionBarActivity {
 
 
                 AnnTitle = td.text();
-
+                invalidateOptionsMenu();
 
 
 
@@ -190,6 +193,12 @@ public class ArxeiaDisplay extends ActionBarActivity {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.inpostmenu, menu);
+
+        if (!arxeia) {
+            menu.findItem(R.id.attach).setVisible(false);
+        }
+
+
         return super.onCreateOptionsMenu(menu);
     }
 

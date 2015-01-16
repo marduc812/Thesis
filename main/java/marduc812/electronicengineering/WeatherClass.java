@@ -63,7 +63,6 @@ public class WeatherClass extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(WeatherClass.this);
-            mProgressDialog.setTitle("Dowloading data");
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();

@@ -31,12 +31,13 @@ public class SQLController {
     }
 
 
-    public void insertData(String name, String link, String desc) {
+    public void insertData(String name, String link, String desc, String cate) {
 
         ContentValues cv = new ContentValues();
         cv.put(DBhelper.NAME, name);
         cv.put(DBhelper.LINK, link);
         cv.put(DBhelper.DESCR,desc);
+        cv.put(DBhelper.CATE,cate);
         db.insert(DBhelper.TABLE_NAME, null, cv);
     }
 
@@ -79,7 +80,7 @@ public class SQLController {
     }
 
     public Cursor readData() {
-        String[] allColumns = new String[] { DBhelper.UID,DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR};
+        String[] allColumns = new String[] { DBhelper.UID,DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR, DBhelper.CATE};
         Cursor c = db.query(DBhelper.TABLE_NAME, allColumns, null,null, null, null, null);
         if (c != null) {
             c.moveToFirst();
@@ -88,7 +89,7 @@ public class SQLController {
     }
 
     public Cursor readKind(String itemKind) {
-        String[] allColumns = new String[] { DBhelper.UID,DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR };
+        String[] allColumns = new String[] { DBhelper.UID,DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR, DBhelper.CATE };
         Cursor c = db.query(DBhelper.TABLE_NAME, allColumns, DBhelper.LINK+ " like '%" + itemKind + "%'",null, null, null, null);
         if (c != null) {
             c.moveToFirst();
@@ -100,7 +101,7 @@ public class SQLController {
     {
         Cursor c = null;
 
-        String[] allColumns = new String[]{DBhelper.UID, DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR};
+        String[] allColumns = new String[]{DBhelper.UID, DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR, DBhelper.CATE};
 
         if (ItemName == null  ||  ItemName.length () == 0)
         {

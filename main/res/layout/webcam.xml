@@ -28,27 +28,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.0"
-        android:background="#3a3a3a">
+        android:background="#fcfcfc">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text=" "
             android:id="@+id/textView"
-            android:textColor="#fcfcfc"
             android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/textView5"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image Size"
+            android:id="@+id/textView6"
+            android:layout_below="@+id/textView5"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image Dimensions"
+            android:id="@+id/textView7"
+            android:layout_below="@+id/textView6"
             android:layout_centerHorizontal="true" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Webcam: 2"
                 android:id="@+id/button2"
@@ -57,17 +81,20 @@
                 android:layout_toRightOf="@+id/button"
                 android:layout_toEndOf="@+id/button"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:background="@null"
+                android:textStyle="bold" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save to Gallery"
+                android:text="Save as image"
                 android:id="@+id/button"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_weight="1"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:background="@null" />
         </LinearLayout>
     </RelativeLayout>
 

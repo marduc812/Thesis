@@ -1,27 +1,30 @@
 package marduc812.electronicengineering;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by marduc on 11/12/14.
@@ -31,11 +34,13 @@ public class Webcam extends ActionBarActivity {
     Handler mHandler = new Handler();
     String webcamurl;
     long dataused;
-    TextView data;
-    Button save,change;
+    TextView data, rrate,imagesize,imgresol;
+    Button save, change;
     Bitmap finalBitmap;
+    int imgsize,imgwid,imghe;
     ImageView img;
     boolean webnum;
+    String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +54,14 @@ public class Webcam extends ActionBarActivity {
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String speed = getPrefs.getString("webref", "2500");
         final int speeddata = Integer.valueOf(speed);
-        webcamurl= "http://www.el.teithe.gr/webcamimg/Camera2.jpg?1415795080660";
+        webcamurl = "http://www.el.teithe.gr/webcamimg/Camera2.jpg?1415795080660";
 
-        dataused=0;
-        webnum=true;
+        dataused = 0;
+        webnum = true;
         data = (TextView) findViewById(R.id.textView);
+        rrate = (TextView) findViewById(R.id.textView5);
+        imagesize = (TextView) findViewById(R.id.textView6);
+        imgresol = (TextView) findViewById(R.id.textView7);
 
         new Thread(new Runnable() {
             @Override
@@ -71,7 +79,12 @@ public class Webcam extends ActionBarActivity {
 
 
                                 new DownloadImageTask((ImageView) findViewById(R.id.imageView6)).execute(webcamurl);
-                                data.setText(dataused+" \nrefresh rate: " + speeddata);
+
+                                data.setText("Data used: " + byteconv(dataused, true));
+                                rrate.setText("Refresh rattio: " + speeddata+ "ms");
+                                imagesize.setText("Image Size: "+imgsize+" bytes");
+                                imgresol.setText("Image Resolution: "+imgwid+"x"+imghe);
+
 
                             }
                         });
@@ -85,37 +98,40 @@ public class Webcam extends ActionBarActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Bitmap bitmap = ((BitmapDrawable)img.getDrawable()).getBitmap();
-                addImageToGallery(Webcam.this,bitmap,"image.jpg","desc.jpg");
-                */
-                saveImage();
+
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                Bitmap combination = ((BitmapDrawable) img.getDrawable()).getBitmap();
+                storeImage(combination,timeStamp+".png");
+                Toast.makeText(getApplicationContext(),"Image image_"+timeStamp+".png"+" got saved in "+ Environment.getExternalStorageDirectory() + "/ElectronicEngi",Toast.LENGTH_SHORT).show();
             }
         });
 
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Bitmap bitmap = ((BitmapDrawable)img.getDrawable()).getBitmap();
-                addImageToGallery(Webcam.this,bitmap,"image.jpg","desc.jpg");
-                */
-                saveImage();
-                if (!webnum)
-                {
+
+
+                if (!webnum) {
                     webcamurl = "http://www.el.teithe.gr/webcamimg/Camera2.jpg?1415795080660";
-                    webnum=true;
+                    webnum = true;
                     change.setText("Webcam:2");
-                }
-                else
-                {
+                } else {
                     webcamurl = "http://www.el.teithe.gr/webcamimg/Camera3.jpg?1415806035575";
-                    webnum=false;
+                    webnum = false;
                     change.setText("Webcam:1");
                 }
             }
         });
 
 
+    }
 
+    public static String byteconv(long bytes, boolean si) {
+        int unit = si ? 1000 : 1024;
+        if (bytes < unit) return bytes + " B";
+        int exp = (int) (Math.log(bytes) / Math.log(unit));
+        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1) + (si ? "" : "i");
+        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -140,45 +156,47 @@ public class Webcam extends ActionBarActivity {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
-            dataused+=sizeOf(result);
+            dataused += sizeOf(result);
+            imgsize = sizeOf(result);
+            imgwid = result.getWidth();
+            imghe = result.getHeight();
 
         }
     }
-    protected int sizeOf(Bitmap data)
-        {
-            return data.getRowBytes() * data.getHeight()/28;
-        }
 
-    public static Uri addImageToGallery(Context context, String filepath, String title, String description) {
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, title);
-        values.put(MediaStore.Images.Media.DESCRIPTION, description);
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-        values.put(MediaStore.MediaColumns.DATA, filepath);
-
-        return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    protected int sizeOf(Bitmap data) {
+        return data.getRowBytes() * data.getHeight() / 28;
     }
 
-    private void saveImage() {
+    private boolean storeImage(Bitmap imageData, String filename) {
+        //get path to external storage (SD card)
+        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/ElectronicEngi/Webcam/";
+        File sdIconStorageDir = new File(iconsStoragePath);
 
-        File myDir=new File("/sdcard/saved_images");
-        myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-"+ n +".jpg";
-        File file = new File(myDir, fname);
-        if (file.exists ()) file.delete ();
+        //create storage directories, if they don't exist
+        sdIconStorageDir.mkdirs();
+
         try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
+            filePath = sdIconStorageDir.toString() + filename;
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
+
+            //choose another format if PNG doesn't suit you
+            imageData.compress(Bitmap.CompressFormat.PNG, 100, bos);
+
+            bos.flush();
+            bos.close();
+
+        } catch (FileNotFoundException e) {
+            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            return false;
+        } catch (IOException e) {
+            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            return false;
         }
+
+        return true;
     }
-    }
+}
 

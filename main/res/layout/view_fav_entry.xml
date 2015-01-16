@@ -16,25 +16,43 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/member_name"
+        android:id="@+id/category_help"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:text="Name" />
+        android:text="Name"
+        android:layout_below="@+id/categ"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:text="New Text"
         android:id="@+id/desctv"
-        android:layout_below="@+id/member_name"
+        android:layout_below="@+id/category_help"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp"
-        android:textColor="#2196F3" />
+        android:textColor="#2196F3"
+        android:layout_marginBottom="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/categ"
+        android:textColor="#fcfcfc"
+        android:background="#F44336"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_below="@+id/member_id"
+        android:layout_alignLeft="@+id/desctv"
+        android:layout_alignStart="@+id/desctv"
+        android:layout_margin="3dp" />
 
 </RelativeLayout>

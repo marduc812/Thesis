@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<String> AnnounceTitles,AnnounceDesc,AnnounceLinks;
     ArrayList<Integer> AnnounceImages;
     SQLController dbcon;
-    String LinkURL,title,desc;
+    String LinkURL,title,desc,cate;
 
     ListView list;
 
@@ -107,6 +107,7 @@ public class MainActivity extends ActionBarActivity {
                 LinkURL = AnnounceLinks.get(pos);
                 title = AnnounceTitles.get(pos);
                 desc = AnnounceDesc.get(pos);
+                cate = "Ανακοινώσεις";
 
 
                 final Dialog dialog = new Dialog(MainActivity.this);
@@ -125,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
 
                         dbcon = new SQLController(MainActivity.this);
                         dbcon.open();
-                        dbcon.insertData(title,LinkURL,desc);
+                        dbcon.insertData(title,LinkURL,desc,cate);
                         dialog.dismiss();
 
                         Toast.makeText(getApplicationContext(),title + " προστέθηκε στα αγαπημένα",Toast.LENGTH_SHORT).show();

@@ -44,7 +44,7 @@ public class Arxeia extends ActionBarActivity {
     ArrayList<Integer> AnnounceImages;
     ListView list;
     SQLController dbcon;
-    String LinkURL,title,desc;
+    String LinkURL,title,desc,cate;
 
 
     @Override
@@ -111,6 +111,7 @@ public class Arxeia extends ActionBarActivity {
                 LinkURL = AnnounceLinks.get(pos);
                 title = AnnounceTitles.get(pos);
                 desc = AnnounceDesc.get(pos);
+                cate = "Αρχεία";
 
 
                 final Dialog dialog = new Dialog(Arxeia.this);
@@ -129,7 +130,7 @@ public class Arxeia extends ActionBarActivity {
 
                         dbcon = new SQLController(Arxeia.this);
                         dbcon.open();
-                        dbcon.insertData(title,LinkURL,desc);
+                        dbcon.insertData(title,LinkURL,desc,cate);
                         dialog.dismiss();
 
                         Toast.makeText(getApplicationContext(), title + " προστέθηκε στα αγαπημένα", Toast.LENGTH_SHORT).show();
@@ -194,7 +195,6 @@ public class Arxeia extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(Arxeia.this);
-            mProgressDialog.setTitle("Dowloading data");
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.show();

@@ -1,5 +1,6 @@
 package marduc812.electronicengineering;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -23,23 +26,20 @@ public class FavoritesActivity extends ActionBarActivity {
     SQLController dbcon;
     ListView favlist;
     SimpleCursorAdapter adapter;
+    TextView  memID_tv;
+    String ids;
+    long idz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favs);
+        setTitle("Αγαπημένα");
 
 
         dbcontrol();
 
 
-
-        /*if(cursor.getCount() == 0)
-        {
-            setContentView(R.layout.emptyviewfavs);
-        }
-        else
-            setContentView(R.layout.favs);*/
 
 
 
@@ -53,11 +53,64 @@ public class FavoritesActivity extends ActionBarActivity {
                 TextView textviewurl = (TextView) findViewById(R.id.link);
                 String LinkURL = textviewurl.getText().toString();
 
-                Intent i = new Intent(FavoritesActivity.this,AnnounDisplay.class);
-                i.putExtra("anURL",LinkURL);
+                Intent i = new Intent(FavoritesActivity.this, AnnounDisplay.class);
+                i.putExtra("anURL", LinkURL);
                 startActivity(i);
 
 
+
+
+            }
+        });
+
+        favlist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           final int pos, long id) {
+                // TODO Auto-generated method stub
+
+                memID_tv = (TextView) arg1.findViewById(R.id.member_id);
+
+                //delete confirmation
+
+                final Dialog dialog = new Dialog(FavoritesActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.deletedialogue);
+                dialog.setCancelable(true);
+                Button del = (Button)dialog.findViewById(R.id.button3);
+                Button cancel = (Button)dialog.findViewById(R.id.cancelbut);
+                dialog.show();
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        dialog.dismiss();
+
+
+                        ids = memID_tv.getText().toString();
+                        idz = Long.parseLong(ids);
+
+                        dbcon.deleteData(idz);
+
+                        Toast.makeText(getApplicationContext(),"Αφαιρέθηκε από τα αγαπημένα",Toast.LENGTH_SHORT).show();
+                        dbcontrol();
+                    }
+                });
+
+
+
+
+                return true;
             }
         });
 
@@ -72,9 +125,9 @@ public class FavoritesActivity extends ActionBarActivity {
 
         Cursor cursor = dbcon.readData();
 
-        final String[] from = new String[] { DBhelper.UID, DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR };
+        final String[] from = new String[] { DBhelper.UID, DBhelper.NAME, DBhelper.LINK, DBhelper.DESCR, DBhelper.CATE };
 
-        int[] to = new int[] { R.id.member_id, R.id.member_name,R.id.link, R.id.desctv };
+        int[] to = new int[] { R.id.member_id, R.id.category_help,R.id.link, R.id.desctv, R.id.categ };
 
         adapter = new SimpleCursorAdapter(
                 FavoritesActivity.this, R.layout.view_fav_entry, cursor, from, to);

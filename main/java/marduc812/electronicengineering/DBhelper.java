@@ -15,11 +15,11 @@ public class DBhelper extends SQLiteOpenHelper {
     public static final String NAME = "name";
     public static final String LINK = "link";
     public static final String DESCR = "desc";
-
+    public static final String CATE = "cate";
 
     // DATABASE INFORMATION
     static final String DB_NAME = "MEMBER.DB";
-    static final int DB_VERSION = 3;
+    static final int DB_VERSION = 4;
 
     // TABLE CREATION STATEMENT
     private static final String CREATE_TABLE = "create table "
@@ -27,7 +27,8 @@ public class DBhelper extends SQLiteOpenHelper {
             + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NAME + " TEXT NOT NULL, "
             + LINK + " TEXT NOT NULL, "
-            + DESCR + " TEXT NOT NULL);";
+            + DESCR + " TEXT NOT NULL, "
+            + CATE + " TEXT NOT NULL);";
 
     public DBhelper(Context context) {
         super(context, DB_NAME, null,DB_VERSION);
