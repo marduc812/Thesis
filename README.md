@@ -1,5 +1,5 @@
 
-Τμήμα Ηλεκτρονικής
+Τμήμα Ηλεκτρονικών Μηχανικών
 =======
 * * *
 The aim of the app is to have an easier and faster access to the department's website.Some of the features of the app are.
